@@ -1,29 +1,29 @@
-export interface LoginRequest {
+export interface UpdateMoviesRequest {
     body: {
-        username: string;
-        password: string;
-    };
-    query: Record<string, unknown>;
-    params: Record<string, unknown>;
-}
-
-export interface LoginReponse {
-    token: string;
-    refresh_token: string;
-    expires_in: number;
-}
-
-export interface UpdatePostRequest {
-    body: {
-        title?: string;
+        author_id?: number;
+        movies_name?: string;
         content?: string;
     };
     query: Record<string, unknown>;
     params: {
-        id: string;
+        movies_id: string;
     };
 }
 
-export interface UpdatePostResponse {
-    id: string | number;
+export interface UpdateMoviesResponse {
+    movie_id: string | number;
+}
+
+export interface UpdateAuthorRequest {
+    body: {
+        author_name?: string;
+    };
+    query: Record<string, unknown>;
+    params: {
+        author_id: string;
+    };
+}
+
+export interface UpdateAuthorResponse {
+    author_id: string | number;
 }

@@ -1,7 +1,6 @@
 export enum API_ROUTE {
-    AUTH = '/auth',
-    PROFILE = '/profile',
-    POST = '/post'
+    AUTHOR = '/author',
+    MOVIES = '/movies'
 }
 
 export const PROTO_FILE_PATH = './node_modules/rey-common-model/proto/rey_default.proto';
