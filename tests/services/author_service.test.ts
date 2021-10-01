@@ -2,6 +2,7 @@ import test from 'ava';
 import * as sinon from 'sinon';
 import AuthorServiceImpl from '../../src/services/impl/author_service_impl';
 import AuthorRepositoryImpl from '../../src/repositories/impl/author_repository_impl';
+import { HttpError } from 'rey-common';
 
 test.beforeEach('Initialize New Sandbox Before Each Test', (t: any): void => {
     t.context.sandbox = sinon.createSandbox();
@@ -43,5 +44,40 @@ test.serial('should success post author data', async (t: any): Promise<void> => 
         .then(response => {
             t.true(mockRepository.called);
             t.is(response, author);
+        });
+});
+
+test.serial('should return author data by id', async (t: any): Promise<void> => {
+    const authorRepository = new AuthorRepositoryImpl();
+    const authorService = new AuthorServiceImpl(authorRepository);
+    const author = {
+        author_id: 1,
+        author_name: 'naufal',
+        createdAt: '',
+        updatedAt: ''
+    };
+
+    const mockRepository = t.context.sandbox.mock(authorRepository).expects('findOne').resolves(author);
+
+    await authorService.getAuthorById(author.author_id)
+        .then(response => {
+            t.true(mockRepository.called);
+            t.is(response, author);
+        });
+});
+
+test.serial('should return null author data by id', async (t: any): Promise<void> => {
+    const authorRepository = new AuthorRepositoryImpl();
+    const authorService = new AuthorServiceImpl(authorRepository);
+
+    const mockRepository = t.context.sandbox.mock(authorRepository).expects('findOne').resolves(null);
+
+    await authorService.getAuthorById(2)
+        .then(() => {
+            t.fail();
+        })
+        .catch(err => {
+            t.true(mockRepository.called);
+            t.true(err instanceof HttpError.NotFoundError);
         });
 });

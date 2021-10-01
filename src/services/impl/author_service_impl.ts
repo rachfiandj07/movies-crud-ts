@@ -22,6 +22,14 @@ export class AuthorServiceImpl extends Service implements AuthorService {
 
         return author;
     }
+
+    public async getAuthorById(author_id: number): Promise<AuthorProperties> {
+        const author = await this.authorRepository.findOne({author_id});
+        if (!author) {
+            throw new HttpError.NotFoundError('author not found', 'AUTHOR_NOT_FOUND');
+        }
+        return author;
+    }
 }
 
 export default AuthorServiceImpl;
