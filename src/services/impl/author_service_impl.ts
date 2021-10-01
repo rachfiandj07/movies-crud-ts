@@ -30,6 +30,12 @@ export class AuthorServiceImpl extends Service implements AuthorService {
         }
         return author;
     }
+
+    public async deleteAuthor(author_id: number): Promise<boolean> {
+        await this.authorRepository.delete({author_id});
+
+        return true;
+    }
 }
 
 export default AuthorServiceImpl;

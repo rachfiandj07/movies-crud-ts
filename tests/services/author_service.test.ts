@@ -81,3 +81,19 @@ test.serial('should return null author data by id', async (t: any): Promise<void
             t.true(err instanceof HttpError.NotFoundError);
         });
 });
+
+test.serial('should return true data by id', async (t: any): Promise<void> => {
+    const authorRepository = new AuthorRepositoryImpl();
+    const authorService = new AuthorServiceImpl(authorRepository);
+    const author = {
+        author_id: 1,
+    };
+
+    const mockRepository = t.context.sandbox.mock(authorRepository).expects('delete').resolves(true);
+
+    await authorService.deleteAuthor(author.author_id)
+        .then(response => {
+            t.true(mockRepository.called);
+            t.is(response, true);
+        });
+});
