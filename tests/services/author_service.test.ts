@@ -106,15 +106,11 @@ test.serial('should return id by update data', async (t: any): Promise<void> => 
         author_name: 'chupatkai'
     };
 
-    const response = {
-        author_id: 1,
-    };
-
-    const mockRepository = t.context.sandbox.mock(authorRepository).expects('update').resolves(author.author_id);
+    const mockRepository = t.context.sandbox.mock(authorRepository).expects('update').resolves({author_id:1});
 
     await authorService.updateAuthorById(author.author_id, author.author_name)
         .then(response => {
             t.true(mockRepository.called);
-            t.is(response, response);
+            t.deepEqual(response, {author_id:1});
         });
 });
