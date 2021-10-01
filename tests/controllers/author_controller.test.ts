@@ -148,3 +148,34 @@ test.serial('should return true by delete id on controller', async (t: any): Pro
             t.is(response, author);
         });
 });
+
+test.serial('should return id author by update id on controller', async (t: any): Promise<void> => {
+    const authorRepository = new AuthorRepositoryImpl();
+    const authorService = new AuthorServiceImpl(authorRepository);
+    const authorController = new AuthorController(authorService);
+    const author = {
+        author_id: 1,
+    };
+    const context: Context = {
+        request_id: '1',
+        user_id: 2,
+        email: 'naufal@go-jek.id',
+        name: 'naufal',
+        phone_number: '081212857166'
+    };
+
+    const data: RequestData = {
+        query: {},
+        params: {},
+        body: {},
+        files: {},
+    };
+
+    const mockRepository = t.context.sandbox.mock(authorService).expects('updateAuthorById').resolves(author);
+
+    await authorController.updateAuthorId(data, context)
+        .then(response => {
+            t.true(mockRepository.called);
+            t.is(response, author);
+        });
+});

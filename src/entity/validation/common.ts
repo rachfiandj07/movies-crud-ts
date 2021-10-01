@@ -29,7 +29,7 @@ export const SCHEME: IObject<Joi.ObjectSchema> = {
             author_name: Joi.string().min(4).max(50).optional(),
         }).required(),
         params: Joi.object({
-            author_id: Joi.number().required()
+            id: Joi.number().required()
         }).required()
     })
 };

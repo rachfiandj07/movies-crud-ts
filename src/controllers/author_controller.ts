@@ -33,9 +33,16 @@ export default class AuthorController extends BaseController {
         return author;
     }
 
+    public async updateAuthorId(data: RequestData, context: Context): Promise<any> {
+        const author = await this.authorService.updateAuthorById(data.params.id, data.body.author_name);
+
+        return author;
+    }
+
     public setRoutes(): void {
         this.addRoute('get', '/', this.getAuthorList.bind(this));
         this.addRoute('get', '/:id', this.getAuthorId.bind(this));
+        this.addRoute('put', '/:id', this.updateAuthorId.bind(this), { validate: SCHEME.UPDATE_AUTHOR });
         this.addRoute('delete', '/:id', this.deleteAuthorId.bind(this));
         this.addRoute('post', '/', this.postAuthor.bind(this), { validate: SCHEME.CREATE_AUTHOR });
     }
