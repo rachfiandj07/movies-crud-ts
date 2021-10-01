@@ -23,7 +23,7 @@ test.serial('should return author data on controller', async (t: any): Promise<v
         createdAt: '',
         updatedAt: ''
     };
-    const context = {
+    const context: Context = {
         request_id: '1',
         user_id: 2,
         email: 'naufal@go-jek.id',
@@ -31,7 +31,7 @@ test.serial('should return author data on controller', async (t: any): Promise<v
         phone_number: '081212857166'
     };
 
-    const data = {
+    const data: RequestData = {
         query: {},
         params: {},
         body: {},
