@@ -36,6 +36,14 @@ export class AuthorServiceImpl extends Service implements AuthorService {
 
         return true;
     }
+
+    public async updateAuthorById(author_id: number, author_name: string): Promise<Partial<AuthorProperties>> {
+        await this.authorRepository.update({author_id}, {author_name});
+
+        return {
+            author_id
+        };
+    }
 }
 
 export default AuthorServiceImpl;

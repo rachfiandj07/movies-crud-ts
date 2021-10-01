@@ -97,3 +97,24 @@ test.serial('should return true data by id', async (t: any): Promise<void> => {
             t.is(response, true);
         });
 });
+
+test.serial('should return id by update data', async (t: any): Promise<void> => {
+    const authorRepository = new AuthorRepositoryImpl();
+    const authorService = new AuthorServiceImpl(authorRepository);
+    const author = {
+        author_id: 1,
+        author_name: 'chupatkai'
+    };
+
+    const response = {
+        author_id: 1,
+    };
+
+    const mockRepository = t.context.sandbox.mock(authorRepository).expects('update').resolves(author.author_id);
+
+    await authorService.updateAuthorById(author.author_id, author.author_name)
+        .then(response => {
+            t.true(mockRepository.called);
+            t.is(response, response);
+        });
+});
