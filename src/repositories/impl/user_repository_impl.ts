@@ -1,15 +1,11 @@
 import { SQLRepository } from 'rey-common';
-import { UserProperties } from '../../entity/models/user';
-import { UserRepository } from '../user_repository';
+import { AuthorProperties } from '../../entity/models/author';
+import { AuthorRepository } from '../user_repository';
 
-export class UserRepositoryImpl extends SQLRepository<UserProperties> implements UserRepository {
+export class AuthorRepositoryImpl extends SQLRepository<AuthorProperties> implements AuthorRepository {
     public constructor() {
-        super('User');
-    }
-
-    public async getTotalUser(): Promise<number> {
-        return 999;
+        super('Author');
     }
 }
 
-export default UserRepositoryImpl;
+export default AuthorRepositoryImpl;

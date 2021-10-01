@@ -1,8 +1,6 @@
 import { SQLRepository } from 'rey-common';
-import { UserProperties } from '../entity/models/user';
+import { AuthorProperties } from '../entity/models/author';
 
-export interface UserRepository extends SQLRepository<UserProperties> {
-    getTotalUser(): Promise<number>
-}
+export type AuthorRepository = SQLRepository<AuthorProperties>
 
-export default UserRepository;
+export default AuthorRepository;

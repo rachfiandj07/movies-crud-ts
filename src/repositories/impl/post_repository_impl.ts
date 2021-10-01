@@ -1,11 +1,11 @@
 import { SQLRepository } from 'rey-common';
-import { PostProperties } from '../../entity/models/post';
-import PostRepository from '../post_repository';
+import { MoviesProperties } from '../../entity/models/movies';
+import MoviesRepository from '../movies_repository';
 
-export class PostRepositoryImpl extends SQLRepository<PostProperties> implements PostRepository {
+export class MoviesRepositoryImpl extends SQLRepository<MoviesProperties> implements MoviesRepository {
     public constructor() {
-        super('Post');
+        super('Movies');
     }
 }
 
-export default PostRepositoryImpl;
+export default MoviesRepositoryImpl;
