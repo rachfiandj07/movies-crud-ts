@@ -16,6 +16,12 @@ export class AuthorServiceImpl extends Service implements AuthorService {
 
         return author;
     }
+
+    public async postAuthor(author_name: string): Promise<AuthorProperties> {
+        const author = await this.authorRepository.create({author_name});
+
+        return author;
+    }
 }
 
 export default AuthorServiceImpl;

@@ -29,3 +29,19 @@ test.serial('should return author data', async (t: any): Promise<void> => {
             t.is(response, author);
         });
 });
+
+test.serial('should success post author data', async (t: any): Promise<void> => {
+    const authorRepository = new AuthorRepositoryImpl();
+    const authorService = new AuthorServiceImpl(authorRepository);
+    const author = {
+        author_name: 'naufal',
+    };
+
+    const mockRepository = t.context.sandbox.mock(authorRepository).expects('create').resolves(author);
+
+    await authorService.postAuthor(author.author_name)
+        .then(response => {
+            t.true(mockRepository.called);
+            t.is(response, author);
+        });
+});
