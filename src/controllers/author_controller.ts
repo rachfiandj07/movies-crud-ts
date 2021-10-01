@@ -21,8 +21,15 @@ export default class AuthorController extends BaseController {
         return author;
     }
 
+    public async getAuthorId(data: RequestData, context: Context): Promise<any> {
+        const author = await this.authorService.getAuthorById(data.params.id);
+
+        return author;
+    }
+
     public setRoutes(): void {
         this.addRoute('get', '/', this.getAuthorList.bind(this));
+        this.addRoute('get', '/:id', this.getAuthorId.bind(this));
         this.addRoute('post', '/', this.postAuthor.bind(this), { validate: SCHEME.CREATE_AUTHOR });
     }
 }
