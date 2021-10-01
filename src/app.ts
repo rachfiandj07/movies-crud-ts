@@ -1,5 +1,7 @@
 import { App as BaseApp, SQLContext, RedisContext } from 'rey-common';
-
+import AuthorController from './controllers/author_controller';
+import AuthorRepositoryImpl from './repositories/impl/author_repository_impl';
+import AuthorServiceImpl from './services/impl/author_service_impl';
 class App extends BaseApp {
     public constructor(port: number) {
         super(port, false, true);
@@ -14,6 +16,12 @@ class App extends BaseApp {
 
     public async initControllers(): Promise<void> {
         /** initiate services */
+        const authorService = new AuthorServiceImpl(
+            new AuthorRepositoryImpl()
+        );
+
+        /** Register Controller */
+        this.addController(new AuthorController(authorService));
 
     }
 }
