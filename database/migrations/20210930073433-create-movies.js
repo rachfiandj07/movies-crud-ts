@@ -20,13 +20,17 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: true
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: true
+      },
+      deleted_at: {
+        type: Sequelize.DATE,
+        allowNull: true
       }
     });
   },
